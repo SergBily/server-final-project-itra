@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import { Server } from 'socket.io';
 import { createServer } from 'http';
 import { v4 as uuidv4 } from 'uuid';
+import authRoutes from './routes/authRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -26,9 +27,7 @@ app.use((_req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
-app.use('/', (_req, res) => {
-  res.send('work');
-});
+app.use('/', authRoutes);
 
 mongoose.set('strictQuery', false);
 mongoose.connect(process.env.DB_URL, {
