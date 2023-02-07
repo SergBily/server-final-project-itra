@@ -34,6 +34,15 @@ class UserService {
     );
     return user;
   }
+
+  async login(email) {
+    const user = await UserModel.findOne({ email });
+    const userDto = new UserDto(user);
+    return {
+      ...getTokens(userDto),
+      user: userDto,
+    };
+  }
 }
 
 const userService = new UserService();

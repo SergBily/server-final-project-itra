@@ -12,6 +12,17 @@ class UserController {
       next(e);
     }
   }
+
+  async login(request, response, next) {
+    try {
+      const { email } = request.body;
+      const userData = await userService.login(email);
+      setRefreshTokenCookie(response, userData.refreshToken);
+      return response.json(userData);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 const userController = new UserController();
