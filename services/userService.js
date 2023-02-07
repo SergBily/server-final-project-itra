@@ -2,6 +2,8 @@ import UserModel from '../models/userModel.js';
 import { getHashPassword } from '../utils/hash.js';
 import getTokens from '../utils/token.js';
 import UserDto from '../dtos/userDto.js';
+import tokenService from './tokenService.js';
+import ApiError from '../exceptions/apiError.js';
 
 class UserService {
   async registration(name, email, password) {
@@ -27,6 +29,25 @@ class UserService {
 
   async login(email) {
     const user = await UserModel.findOne({ email });
+    const userDto = new UserDto(user);
+    return {
+      ...getTokens(userDto),
+      user: userDto,
+    };
+  }
+
+  async logout(refreshToken) {
+    const token = await tokenService.removeToken(refreshToken);
+    return token;
+  }
+
+  async updateRefreshToken(refreshToken) {
+    const userData = tokenService.validateRefreshToken(refreshToken);
+    const tokenFromDb = await tokenService.findToken(refreshToken);
+    if (!userData || !tokenFromDb) {
+      throw ApiError.UnauthorizedError();
+    }
+    const user = await UserModel.findById(userData.id);
     const userDto = new UserDto(user);
     return {
       ...getTokens(userDto),

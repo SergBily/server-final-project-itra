@@ -23,6 +23,28 @@ class UserController {
       next(e);
     }
   }
+
+  async logout(request, response, next) {
+    try {
+      const { refreshToken } = request.cookies;
+      const token = await userService.logout(refreshToken);
+      response.clearCookie('refreshToken');
+      response.json(token);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async refresh(request, response, next) {
+    try {
+      const { refreshToken } = request.cookies;
+      const userData = await userService.updateRefreshToken(refreshToken);
+      setRefreshTokenCookie(response, userData.refreshToken);
+      return response.json(userData);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 const userController = new UserController();
