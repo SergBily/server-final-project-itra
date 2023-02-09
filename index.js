@@ -22,10 +22,10 @@ app.use(cors({
   credentials: true,
   optionSuccessStatus: 200,
 }));
-app.use((_req, res, next) => {
-  res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL);
-  res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+app.use((_request, response, next) => {
+  // response.header('Access-Control-Allow-Origin', process.env.CLIENT_URL);
+  // response.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE');
+  response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 app.use('/', authRoutes);
