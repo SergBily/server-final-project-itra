@@ -28,6 +28,7 @@ class UserController {
     try {
       const { refreshToken } = request.cookies;
       const token = await userService.logout(refreshToken);
+      console.log(1);
       response.clearCookie('refreshToken');
       response.json(token);
     } catch (e) {

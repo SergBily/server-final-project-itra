@@ -33,6 +33,7 @@
         {
           "": "never"
         }
-     ]
+     ],
+     "no-unused-vars": "off"
     }
 }
