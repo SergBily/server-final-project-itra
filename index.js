@@ -8,6 +8,7 @@ import { createServer } from 'http';
 import { v4 as uuidv4 } from 'uuid';
 import authRoutes from './routes/authRoutes.js';
 import erorrHandler from './middlewares/errorHandler.js';
+import collectionRoutes from './routes/collectionRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -23,12 +24,11 @@ app.use(cors({
   optionSuccessStatus: 200,
 }));
 app.use((_request, response, next) => {
-  // response.header('Access-Control-Allow-Origin', process.env.CLIENT_URL);
-  // response.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE');
   response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 app.use('/', authRoutes);
+app.use('/collection', collectionRoutes);
 app.use(erorrHandler);
 
 mongoose.set('strictQuery', false);

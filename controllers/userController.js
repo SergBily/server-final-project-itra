@@ -29,7 +29,7 @@ class UserController {
       const { refreshToken } = request.cookies;
       const token = await userService.logout(refreshToken);
       response.clearCookie('refreshToken');
-      response.json(token);
+      return response.json(token);
     } catch (e) {
       next(e);
     }
