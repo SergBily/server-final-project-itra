@@ -10,6 +10,16 @@ class CollectionController {
       next(e);
     }
   }
+
+  async getAllCollection(request, response, next) {
+    try {
+      const { userId } = request.params;
+      const collections = await collectionService.getCollections(userId);
+      return response.json(collections);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 const collectionController = new CollectionController();

@@ -5,5 +5,6 @@ import checkExistsCollection from '../middlewares/collections/checkExistsCollect
 const collectionRoutes = express.Router();
 
 collectionRoutes.post('/create', checkExistsCollection, collectionController.create);
+collectionRoutes.get('/all/:userId', collectionController.getAllCollection);
 
 export default collectionRoutes;

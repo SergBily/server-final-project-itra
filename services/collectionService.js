@@ -1,5 +1,6 @@
 import CollectionModel from '../models/collectionModel.js';
 import CollectionDto from '../dtos/collectionDto.js';
+import AllCollectionDto from '../dtos/allCollectionDto.js';
 
 class CollectionService {
   async create(c) {
@@ -20,6 +21,11 @@ class CollectionService {
       },
     );
     return new CollectionDto(collection);
+  }
+
+  async getCollections(userId) {
+    const collections = await CollectionModel.find({ userId });
+    return collections.map((c) => new AllCollectionDto(c));
   }
 }
 
