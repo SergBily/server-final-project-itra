@@ -5,7 +5,7 @@ const CollectionSchema = new Schema(
     userId: { type: Schema.Types.ObjectId, ref: 'User' },
     imageUrl: { type: String },
     topic: { type: String, required: true },
-    title: { type: String, unique: true },
+    title: { type: String, required: true },
     description: { type: String },
     customFields: {
       number: { type: Array },
