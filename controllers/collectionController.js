@@ -20,6 +20,16 @@ class CollectionController {
       next(e);
     }
   }
+
+  async delete(request, response, next) {
+    try {
+      const { id } = request.params;
+      const collections = await collectionService.deleteCollections(id);
+      return response.json(collections);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 const collectionController = new CollectionController();

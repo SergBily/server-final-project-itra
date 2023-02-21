@@ -27,6 +27,10 @@ class CollectionService {
     const collections = await CollectionModel.find({ userId });
     return collections.map((c) => new AllCollectionDto(c));
   }
+
+  async deleteCollections(_id) {
+    return CollectionModel.deleteOne({ _id });
+  }
 }
 
 const collectionService = new CollectionService();

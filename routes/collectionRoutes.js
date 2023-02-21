@@ -6,5 +6,6 @@ const collectionRoutes = express.Router();
 
 collectionRoutes.post('/create', checkExistsCollection, collectionController.create);
 collectionRoutes.get('/all/:userId', collectionController.getAllCollection);
+collectionRoutes.delete('/delete/:id', collectionController.delete);
 
 export default collectionRoutes;
