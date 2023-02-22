@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import authRoutes from './routes/authRoutes.js';
 import erorrHandler from './middlewares/errorHandler.js';
 import collectionRoutes from './routes/collectionRoutes.js';
+import itemRoutes from './routes/itemRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -29,6 +30,7 @@ app.use((_request, response, next) => {
 });
 app.use('/', authRoutes);
 app.use('/collection', collectionRoutes);
+app.use('/item', itemRoutes);
 app.use(erorrHandler);
 
 mongoose.set('strictQuery', false);
