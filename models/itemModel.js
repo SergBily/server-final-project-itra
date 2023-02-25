@@ -7,11 +7,11 @@ const ItemSchema = new Schema(
     tags: { type: Array },
     title: { type: String, required: true },
     customFields: {
-      number: { type: Array },
-      string: { type: Array },
-      textarea: { type: Array },
-      date: { type: Array },
-      checkbox: { type: Array },
+      number: { type: Object },
+      string: { type: Object },
+      textarea: { type: Object },
+      date: { type: Object },
+      checkbox: { type: Object },
     },
   },
   {
