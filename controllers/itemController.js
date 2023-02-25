@@ -10,6 +10,16 @@ class ItemController {
       next(e);
     }
   }
+
+  async delete(request, response, next) {
+    try {
+      const { id } = request.params;
+      const deleted = await itemsService.deleteItem(id);
+      return response.json(deleted);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 const itemController = new ItemController();

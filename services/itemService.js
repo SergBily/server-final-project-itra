@@ -1,9 +1,12 @@
 import ItemModel from '../models/itemModel.js';
 import ItemDto from '../dtos/itemDto.js';
+import sortByDate from '../utils/sortByDate.js';
 
 class ItemService {
   async getItemsCollection(collectionId) {
-    return ItemModel.find({ collectionId });
+    const items = await ItemModel.find({ collectionId });
+    const sortedItems = sortByDate(items);
+    return sortedItems.map((c) => new ItemDto(c));
   }
 
   async create(c) {
@@ -23,6 +26,14 @@ class ItemService {
       },
     );
     return new ItemDto(collection);
+  }
+
+  async deleteAllItemsCollection(collectionId) {
+    await ItemModel.deleteMany({ collectionId });
+  }
+
+  async deleteItem(_id) {
+    return ItemModel.deleteOne({ _id });
   }
 }
 
