@@ -1,6 +1,8 @@
 import CollectionModel from '../models/collectionModel.js';
 import CollectionDto from '../dtos/collectionDto.js';
 import AllCollectionDto from '../dtos/allCollectionDto.js';
+import sortByDate from '../utils/sortByDate.js';
+import itemsService from './itemService.js';
 
 class CollectionService {
   async create(c) {
@@ -25,11 +27,18 @@ class CollectionService {
 
   async getCollections(userId) {
     const collections = await CollectionModel.find({ userId });
-    return collections.map((c) => new AllCollectionDto(c));
+    const sortedColletions = sortByDate(collections);
+    return sortedColletions.map((c) => new AllCollectionDto(c));
   }
 
   async deleteCollections(_id) {
+    itemsService.deleteAllItemsCollection(_id);
     return CollectionModel.deleteOne({ _id });
+  }
+
+  async getCollection(_id) {
+    const collection = await CollectionModel.findById({ _id });
+    return new CollectionDto(collection);
   }
 }
 
