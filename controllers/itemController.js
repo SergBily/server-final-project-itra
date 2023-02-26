@@ -20,6 +20,27 @@ class ItemController {
       next(e);
     }
   }
+
+  async getItem(request, response, next) {
+    try {
+      const { id } = request.params;
+      const item = await itemsService.getItem(id);
+      return response.json(item);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  updateItem(request, response, next) {
+    try {
+      const { id } = request.params;
+      const item = request.body;
+      itemsService.updateItem(id, item);
+      return response.send('item updated');
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 const itemController = new ItemController();

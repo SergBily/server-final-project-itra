@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
   origin: [process.env.CLIENT_URL, process.env.DEPLOY_URL],
-  methods: ['GET', 'POST', 'DELETE', 'PATCH'],
+  methods: ['GET', 'POST', 'DELETE', 'PUT'],
   credentials: true,
   optionSuccessStatus: 200,
 }));

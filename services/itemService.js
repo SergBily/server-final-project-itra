@@ -32,8 +32,21 @@ class ItemService {
     await ItemModel.deleteMany({ collectionId });
   }
 
-  async deleteItem(_id) {
+  deleteItem(_id) {
     return ItemModel.deleteOne({ _id });
+  }
+
+  async getItem(_id) {
+    const item = await ItemModel.findOne({ _id });
+    return new ItemDto(item);
+  }
+
+  async updateItem(_id, payload) {
+    const item = await ItemModel.findOne({ _id });
+    item.title = payload.title;
+    item.tags = payload.tags;
+    item.customFields = payload.customFields;
+    await item.save();
   }
 }
 

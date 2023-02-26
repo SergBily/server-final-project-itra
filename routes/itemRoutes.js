@@ -7,5 +7,7 @@ const itemRoutes = express.Router();
 
 itemRoutes.post('/create', checkExistsItemTitle, itemController.create);
 itemRoutes.delete('/delete/:id', itemController.delete);
+itemRoutes.get('/:id', checkExistsItem, itemController.getItem);
+itemRoutes.put('/edit/:id', checkExistsItem, itemController.updateItem);
 
 export default itemRoutes;
