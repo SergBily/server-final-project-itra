@@ -6,6 +6,7 @@ const ItemSchema = new Schema(
     collectionId: { type: Schema.Types.ObjectId, ref: 'Collection' },
     tags: { type: Array },
     title: { type: String, required: true },
+    visits: { type: Number, default: 0 },
     customFields: {
       number: { type: Object },
       string: { type: Object },

@@ -51,6 +51,16 @@ class ItemController {
       next(e);
     }
   }
+
+  async updateVisits(request, response, next) {
+    try {
+      const { id } = request.params;
+      itemsService.updateVisits(id);
+      return response.send('updated');
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 const itemController = new ItemController();

@@ -10,5 +10,6 @@ itemRoutes.delete('/delete/:id', itemController.delete);
 itemRoutes.get('/:id', checkExistsItem, itemController.getItem);
 itemRoutes.put('/edit/:id', checkExistsItem, itemController.updateItem);
 itemRoutes.get('/all/:collectionId', itemController.getItemsCollection);
+itemRoutes.patch('/:id', itemController.updateVisits);
 
 export default itemRoutes;

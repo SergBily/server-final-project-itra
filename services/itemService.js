@@ -48,6 +48,12 @@ class ItemService {
     item.customFields = payload.customFields;
     await item.save();
   }
+
+  async updateVisits(_id) {
+    const item = await ItemModel.findOne({ _id });
+    item.visits += 1;
+    await item.save();
+  }
 }
 
 const itemsService = new ItemService();
