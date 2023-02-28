@@ -11,5 +11,7 @@ itemRoutes.get('/:id', checkExistsItem, itemController.getItem);
 itemRoutes.put('/edit/:id', checkExistsItem, itemController.updateItem);
 itemRoutes.get('/all/:collectionId', itemController.getItemsCollection);
 itemRoutes.patch('/:id', itemController.updateVisits);
+itemRoutes.patch('/like/add/:id', itemController.addLike);
+itemRoutes.patch('/like/remove/:id', itemController.removeLike);
 
 export default itemRoutes;

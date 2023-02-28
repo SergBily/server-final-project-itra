@@ -7,6 +7,7 @@ const ItemSchema = new Schema(
     tags: { type: Array },
     title: { type: String, required: true },
     visits: { type: Number, default: 0 },
+    likes: { type: Array },
     customFields: {
       number: { type: Object },
       string: { type: Object },

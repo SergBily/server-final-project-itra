@@ -52,11 +52,33 @@ class ItemController {
     }
   }
 
-  async updateVisits(request, response, next) {
+  updateVisits(request, response, next) {
     try {
       const { id } = request.params;
       itemsService.updateVisits(id);
       return response.send('updated');
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async addLike(request, response, next) {
+    try {
+      const { id } = request.params;
+      const { userId } = request.body;
+      const item = await itemsService.addLike(id, userId);
+      return response.json(item);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async removeLike(request, response, next) {
+    try {
+      const { id } = request.params;
+      const { userId } = request.body;
+      const item = await itemsService.removeLike(id, userId);
+      return response.json(item);
     } catch (e) {
       next(e);
     }

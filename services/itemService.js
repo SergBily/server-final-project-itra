@@ -54,6 +54,21 @@ class ItemService {
     item.visits += 1;
     await item.save();
   }
+
+  async addLike(_id, userId) {
+    const item = await ItemModel.findOne({ _id });
+    item.likes.push(userId);
+    await item.save();
+    return new ItemDto(item);
+  }
+
+  async removeLike(_id, userId) {
+    const item = await ItemModel.findOne({ _id });
+    const indexRemoveLike = item.likes.indexOf(userId);
+    item.likes.splice(indexRemoveLike, 1);
+    await item.save();
+    return new ItemDto(item);
+  }
 }
 
 const itemsService = new ItemService();
