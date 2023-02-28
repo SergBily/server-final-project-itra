@@ -32,12 +32,11 @@ class CollectionController {
     }
   }
 
-  async getOpenCollection(request, response, next) {
+  async getCollection(request, response, next) {
     try {
       const { id } = request.params;
       const collection = await collectionService.getCollection(id);
-      const items = await itemsService.getItemsCollection(id);
-      return response.json({ collection, items });
+      return response.json(collection);
     } catch (e) {
       next(e);
     }

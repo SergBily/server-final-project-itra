@@ -1,7 +1,7 @@
 import CollectionModel from '../models/collectionModel.js';
 import CollectionDto from '../dtos/collectionDto.js';
 import AllCollectionDto from '../dtos/allCollectionDto.js';
-import sortByDate from '../utils/sortByDate.js';
+import { sortByDateDown } from '../utils/sortByDate.js';
 import itemsService from './itemService.js';
 
 class CollectionService {
@@ -27,7 +27,7 @@ class CollectionService {
 
   async getCollections(userId) {
     const collections = await CollectionModel.find({ userId });
-    const sortedColletions = sortByDate(collections);
+    const sortedColletions = sortByDateDown(collections);
     return sortedColletions.map((c) => new AllCollectionDto(c));
   }
 

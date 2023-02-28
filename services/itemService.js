@@ -1,11 +1,11 @@
 import ItemModel from '../models/itemModel.js';
 import ItemDto from '../dtos/itemDto.js';
-import sortByDate from '../utils/sortByDate.js';
+import { sortByDateDown } from '../utils/sortByDate.js';
 
 class ItemService {
   async getItemsCollection(collectionId) {
     const items = await ItemModel.find({ collectionId });
-    const sortedItems = sortByDate(items);
+    const sortedItems = sortByDateDown(items);
     return sortedItems.map((c) => new ItemDto(c));
   }
 

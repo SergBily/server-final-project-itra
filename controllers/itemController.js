@@ -41,6 +41,16 @@ class ItemController {
       next(e);
     }
   }
+
+  async getItemsCollection(request, response, next) {
+    try {
+      const { collectionId } = request.params;
+      const items = await itemsService.getItemsCollection(collectionId);
+      return response.json(items);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 const itemController = new ItemController();

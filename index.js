@@ -10,6 +10,8 @@ import authRoutes from './routes/authRoutes.js';
 import erorrHandler from './middlewares/errorHandler.js';
 import collectionRoutes from './routes/collectionRoutes.js';
 import itemRoutes from './routes/itemRoutes.js';
+import onConnection from './socket/onConnection.js';
+import commentRoutes from './routes/commentRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -31,6 +33,7 @@ app.use((_request, response, next) => {
 app.use('/', authRoutes);
 app.use('/collection', collectionRoutes);
 app.use('/item', itemRoutes);
+app.use('/comment', commentRoutes);
 app.use(erorrHandler);
 
 mongoose.set('strictQuery', false);
@@ -46,22 +49,17 @@ const io = new Server(server, {
 server.listen(PORT, () => console.log('port is work'));
 
 io.use((socket, next) => {
-  const { userName, sessionID, userID } = socket.handshake.auth;
-  if (!userName) {
+  const { itemId } = socket.handshake.auth;
+  if (!itemId) {
     return next(new Error('invalid username'));
-  }
-  if (sessionID) {
-    socket.sessionID = sessionID;
-    socket.userID = userID;
-    socket.userName = userName;
-    next();
   }
   socket.sessionID = uuidv4();
   socket.userID = uuidv4();
-  socket.userName = userName;
+  socket.itemId = itemId;
   next();
 });
 
 io.on('connection', (socket) => {
-  socket.join(socket.userName);
+  socket.join(socket.itemId);
+  onConnection(socket, io);
 });
