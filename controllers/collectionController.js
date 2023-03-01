@@ -41,6 +41,17 @@ class CollectionController {
       next(e);
     }
   }
+
+  async editCollection(request, response, next) {
+    try {
+      const { id } = request.params;
+      const payload = request.body;
+      const collection = await collectionService.editCollection(id, payload);
+      return response.json(collection);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 const collectionController = new CollectionController();

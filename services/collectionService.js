@@ -40,6 +40,16 @@ class CollectionService {
     const collection = await CollectionModel.findById({ _id });
     return new CollectionDto(collection);
   }
+
+  async editCollection(_id, payload) {
+    const collection = await CollectionModel.findById({ _id });
+    collection.topic = payload.topic;
+    collection.title = payload.title;
+    collection.description = payload.description;
+    collection.imageUrl = payload.image;
+    collection.customFields = payload.customFields;
+    await collection.save();
+  }
 }
 
 const collectionService = new CollectionService();

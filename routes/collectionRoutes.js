@@ -8,5 +8,6 @@ collectionRoutes.post('/create', checkExistsCollection, collectionController.cre
 collectionRoutes.get('/all/:userId', collectionController.getAllCollection);
 collectionRoutes.delete('/delete/:id', collectionController.delete);
 collectionRoutes.get('/:id', collectionController.getCollection);
+collectionRoutes.put('/edit/:id', collectionController.editCollection);
 
 export default collectionRoutes;
