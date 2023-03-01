@@ -21,7 +21,7 @@ const server = createServer(app);
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: [process.env.CLIENT_URL, process.env.DEPLOY_URL],
+  origin: [process.env.CLIENT_URL, process.env.DEPLOY_URL, process.env.DEPLOY_URL2],
   methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
   credentials: true,
   optionSuccessStatus: 200,
@@ -43,7 +43,7 @@ mongoose.connect(process.env.DB_URL, {
 });
 
 const io = new Server(server, {
-  cors: [process.env.CLIENT_URL, process.env.DEPLOY_URL],
+  cors: [process.env.CLIENT_URL, process.env.DEPLOY_URL, process.env.DEPLOY_URL2],
 });
 
 server.listen(PORT, () => console.log('port is work'));
