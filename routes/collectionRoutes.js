@@ -9,5 +9,6 @@ collectionRoutes.get('/all/:userId', collectionController.getAllCollection);
 collectionRoutes.delete('/delete/:id', collectionController.delete);
 collectionRoutes.get('/:id', collectionController.getCollection);
 collectionRoutes.put('/edit/:id', collectionController.editCollection);
+collectionRoutes.get('/home/largest', collectionController.getLargestCollection);
 
 export default collectionRoutes;

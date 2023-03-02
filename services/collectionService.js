@@ -3,6 +3,8 @@ import CollectionDto from '../dtos/collectionDto.js';
 import AllCollectionDto from '../dtos/allCollectionDto.js';
 import { sortByDateDown } from '../utils/sortByDate.js';
 import itemsService from './itemService.js';
+import ItemModel from '../models/itemModel.js';
+import sortLargestCollections from '../utils/sortLargestCollections.js';
 
 class CollectionService {
   async create(c) {
@@ -49,6 +51,15 @@ class CollectionService {
     collection.imageUrl = payload.image;
     collection.customFields = payload.customFields;
     await collection.save();
+  }
+
+  async getLargestCollection() {
+    const all = await CollectionModel.find();
+    const collectionsId = all.map((c) => c.id);
+    const promisesItems = collectionsId.map(async (v) => ItemModel.find({ collectionId: v }));
+    const allItems = await Promise.all(promisesItems);
+    const sorted = sortLargestCollections(collectionsId, allItems);
+    return sorted.map((e) => new CollectionDto(all.find((col) => col.id === e[0]))).splice(0, 5);
   }
 }
 

@@ -52,6 +52,15 @@ class CollectionController {
       next(e);
     }
   }
+
+  async getLargestCollection(request, response, next) {
+    try {
+      const sortedCollection = await collectionService.getLargestCollection();
+      return response.json(sortedCollection);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 const collectionController = new CollectionController();
