@@ -48,7 +48,7 @@ const io = new Server(server, {
   cors: [process.env.CLIENT_URL, process.env.DEPLOY_URL, process.env.DEPLOY_URL2],
 });
 
-server.listen(PORT, () => console.log('port is work'));
+server.listen(PORT);
 
 io.use((socket, next) => {
   const { itemId } = socket.handshake.auth;

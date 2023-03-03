@@ -18,7 +18,6 @@ class AdminService {
   }
 
   changeRoleUsers(_id, role) {
-    console.log(_id, role, 2);
     return UserModel.updateOne({ _id }, { $set: { role } });
   }
 }

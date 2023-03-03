@@ -35,7 +35,6 @@ class AdminController {
     try {
       const { id } = request.params;
       const { role } = request.body;
-      console.log(id, role, 1);
       await adminService.changeRoleUsers(id, role);
       return response.send('successfully');
     } catch (e) {
