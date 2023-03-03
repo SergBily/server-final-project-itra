@@ -5,6 +5,7 @@ import validationNewUser from '../middlewares/validationNewUser.js';
 import checkLoginData from '../middlewares/checkLoginData.js';
 import checkRegistrationData from '../middlewares/checkRegistrationData.js';
 import checkRefreshToken from '../middlewares/checkRefreshToken.js';
+import checkStatusUser from '../middlewares/user/checkStatusUser.js';
 
 const authRoutes = express.Router();
 
@@ -16,7 +17,7 @@ authRoutes.post(
   checkRegistrationData,
   userController.registration,
 );
-authRoutes.post('/login', checkLoginData, userController.login);
+authRoutes.post('/login', checkLoginData, checkStatusUser, userController.login);
 authRoutes.post('/logout', userController.logout);
 authRoutes.get('/refresh', checkRefreshToken, userController.refresh);
 

@@ -18,7 +18,7 @@ class ApiError extends Error {
   }
 
   static Forbidden() {
-    return new ApiError(403, "You don't have access!");
+    return new ApiError(403, 'app.user.access');
   }
 
   static NotFound(message) {

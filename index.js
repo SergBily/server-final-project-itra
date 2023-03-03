@@ -12,6 +12,7 @@ import collectionRoutes from './routes/collectionRoutes.js';
 import itemRoutes from './routes/itemRoutes.js';
 import onConnection from './socket/onConnection.js';
 import commentRoutes from './routes/commentRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -34,6 +35,7 @@ app.use('/', authRoutes);
 app.use('/collection', collectionRoutes);
 app.use('/item', itemRoutes);
 app.use('/comment', commentRoutes);
+app.use('/admin', adminRoutes);
 app.use(erorrHandler);
 
 mongoose.set('strictQuery', false);

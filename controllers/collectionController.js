@@ -1,5 +1,4 @@
 import collectionService from '../services/collectionService.js';
-import itemsService from '../services/itemService.js';
 
 class CollectionController {
   async create(request, response, next) {
@@ -53,7 +52,7 @@ class CollectionController {
     }
   }
 
-  async getLargestCollection(request, response, next) {
+  async getLargestCollection(_request, response, next) {
     try {
       const sortedCollection = await collectionService.getLargestCollection();
       return response.json(sortedCollection);
