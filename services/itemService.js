@@ -69,6 +69,11 @@ class ItemService {
     await item.save();
     return new ItemDto(item);
   }
+
+  async getLastItems() {
+    const lastItems = await ItemModel.find().sort({ createdAt: -1 }).limit(10);
+    return lastItems.map((i) => new ItemDto(i));
+  }
 }
 
 const itemsService = new ItemService();

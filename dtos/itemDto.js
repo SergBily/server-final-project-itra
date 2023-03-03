@@ -11,6 +11,8 @@ class ItemDto {
 
   likes;
 
+  collectionId;
+
   constructor(model) {
     this.tags = model.tags;
     this.title = model.title;
@@ -18,6 +20,7 @@ class ItemDto {
     this.id = model._id;
     this.visits = model.visits;
     this.likes = model.likes;
+    this.collectionId = model.collectionId;
   }
 }
 

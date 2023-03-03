@@ -83,6 +83,15 @@ class ItemController {
       next(e);
     }
   }
+
+  async getLastItems(_request, response, next) {
+    try {
+      const lastItems = await itemsService.getLastItems();
+      return response.json(lastItems);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 const itemController = new ItemController();
