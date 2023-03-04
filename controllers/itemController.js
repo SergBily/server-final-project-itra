@@ -92,6 +92,15 @@ class ItemController {
       next(e);
     }
   }
+
+  async getTags(_request, response, next) {
+    try {
+      const tags = await itemsService.getTags();
+      return response.json(tags);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 const itemController = new ItemController();

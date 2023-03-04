@@ -14,5 +14,6 @@ itemRoutes.patch('/:id', itemController.updateVisits);
 itemRoutes.patch('/like/add/:id', itemController.addLike);
 itemRoutes.patch('/like/remove/:id', itemController.removeLike);
 itemRoutes.get('/home/last', itemController.getLastItems);
+itemRoutes.get('/cloud/tags', itemController.getTags);
 
 export default itemRoutes;

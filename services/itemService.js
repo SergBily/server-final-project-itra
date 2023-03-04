@@ -74,6 +74,11 @@ class ItemService {
     const lastItems = await ItemModel.find().sort({ createdAt: -1 }).limit(10);
     return lastItems.map((i) => new ItemDto(i));
   }
+
+  async getTags() {
+    const allTags = await ItemModel.find({}, { tags: 1, _id: 0 });
+    return allTags.map((t) => t.tags).flat().map((e) => ({ title: e }));
+  }
 }
 
 const itemsService = new ItemService();
